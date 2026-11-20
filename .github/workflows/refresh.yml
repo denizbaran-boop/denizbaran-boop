@@ -1,0 +1,64 @@
+name: Refresh profile cards
+
+# Reads the real contribution calendar, redraws the SVG cards and commits
+# them when they changed. The commit is made by the Actions bot, so it does
+# not count as activity on the profile owner's graph.
+
+on:
+  schedule:
+    - cron: "17 4 * * *" # every day, 07:17 Istanbul time
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "data/profile.json"
+      - "assets/fonts/**"
+      - "requirements.txt"
+      - ".github/workflows/refresh.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-cards
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Test
+        run: python -m pytest tests -q
+
+      - name: Fetch contributions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/fetch_contributions.py
+
+      - name: Draw cards
+        run: python scripts/render_cards.py
+
+      - name: Commit if the cards changed
+        run: |
+          if git diff --quiet -- cards; then
+            echo "Cards are unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards data/contributions.json
+          git commit -m "chore: refresh profile cards"
+          git push

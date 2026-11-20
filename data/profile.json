@@ -1,0 +1,55 @@
+{
+  "login": "denizbaran-boop",
+  "brand": "DBLabs",
+  "site_label": "dblabs.site",
+  "hero": {
+    "eyebrow": "BAĞIMSIZ DİJİTAL ÜRÜN STÜDYOSU",
+    "lines": ["İyi fikirler.", "İnce işçilik."],
+    "body": "Günlük hayatı biraz daha iyi yapan uygulamalar, oyunlar ve dijital deneyimler.",
+    "mark": "db",
+    "byline": "Deniz Baran tarafından",
+    "marquee": ["Fikirden ürüne", "Her detayda özen", "Biraz da sihir"]
+  },
+  "products": [
+    {
+      "slug": "notchland",
+      "name": "Notchland",
+      "platform": "macOS",
+      "tagline": "Çentiğin. Yeniden düşünüldü.",
+      "art": "notch"
+    },
+    {
+      "slug": "minimath",
+      "name": "MiniMath",
+      "platform": "iOS",
+      "tagline": "Zihnine iyi gelen oyun.",
+      "art": "math"
+    },
+    {
+      "slug": "driveparty",
+      "name": "Drive Party",
+      "platform": "iOS · Web",
+      "tagline": "Yolculuk birlikte güzel.",
+      "art": "route"
+    }
+  ],
+  "activity": {
+    "eyebrow": "GITHUB / SON 12 AY",
+    "labels": {
+      "total": "katkı",
+      "active_days": "aktif gün",
+      "public_repos": "açık repo"
+    },
+    "note": "Her sabah GitHub verisinden yenilenir.",
+    "months": ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+    "legend": ["Az", "Çok"]
+  },
+  "theme": {
+    "bg": "#10110f",
+    "panel": "#171914",
+    "text": "#f1f1e9",
+    "muted": "#92958a",
+    "line": "#2c2e27",
+    "accent": "#d0f58c"
+  }
+}
